@@ -17,7 +17,7 @@ namespace WebApplication.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ProjectID { get; set; }
         [DisplayName("Nazwa")]
         [Required]
