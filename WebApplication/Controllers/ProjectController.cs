@@ -64,12 +64,16 @@ namespace WebApplication.Controllers
                         project.Steps.Add(step);
                     }
                 }
+            if (ModelState.IsValid)
+            {
 
-           
                 db.Projects.Add(project);
+
                 db.SaveChanges();
-               // return RedirectToAction("Index");
-            
+                return RedirectToAction("Index");
+
+            }
+
 
             return View(project);
         }
