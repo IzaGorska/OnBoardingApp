@@ -83,5 +83,3 @@ C:\Users\igorska\source\repos\WebApplication\WebApplication\obj\Debug\WebApplica
 C:\Users\igorska\source\repos\WebApplication\WebApplication\obj\Debug\WebApplication.pdb
 C:\Users\igorska\source\repos\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.InitialCreate.resources
 C:\Users\igorska\source\repos\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.GenerateResource.cache
-C:\Users\igorska\source\repos\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.ComplexDataModel.resources
-C:\Users\igorska\source\repos\WebApplication\WebApplication\obj\Debug\WebApplication.Migrations.StepProjectKey.resources

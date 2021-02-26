@@ -30,17 +30,14 @@
                         LastName = c.String(nullable: false, maxLength: 20),
                         Location = c.Int(nullable: false),
                         Contract = c.Int(nullable: false),
-                        Project_ProjectID = c.Int(),
                     })
-                .PrimaryKey(t => t.ID)
-                .ForeignKey("dbo.Project", t => t.Project_ProjectID)
-                .Index(t => t.Project_ProjectID);
+                .PrimaryKey(t => t.ID);
             
             CreateTable(
                 "dbo.Project",
                 c => new
                     {
-                        ProjectID = c.Int(nullable: false),
+                        ProjectID = c.Int(nullable: false, identity: true),
                         Name = c.String(nullable: false),
                         Description = c.String(),
                     })
@@ -59,18 +56,34 @@
                 .ForeignKey("dbo.Project", t => t.ProjectID, cascadeDelete: true)
                 .Index(t => t.ProjectID);
             
+            CreateTable(
+                "dbo.ProjectEmployee",
+                c => new
+                    {
+                        Project_ProjectID = c.Int(nullable: false),
+                        Employee_ID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Project_ProjectID, t.Employee_ID })
+                .ForeignKey("dbo.Project", t => t.Project_ProjectID, cascadeDelete: true)
+                .ForeignKey("dbo.Employee", t => t.Employee_ID, cascadeDelete: true)
+                .Index(t => t.Project_ProjectID)
+                .Index(t => t.Employee_ID);
+            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Step", "ProjectID", "dbo.Project");
-            DropForeignKey("dbo.Employee", "Project_ProjectID", "dbo.Project");
+            DropForeignKey("dbo.ProjectEmployee", "Employee_ID", "dbo.Employee");
+            DropForeignKey("dbo.ProjectEmployee", "Project_ProjectID", "dbo.Project");
             DropForeignKey("dbo.Assignment", "ProjectID", "dbo.Project");
             DropForeignKey("dbo.Assignment", "EmployeeID", "dbo.Employee");
+            DropIndex("dbo.ProjectEmployee", new[] { "Employee_ID" });
+            DropIndex("dbo.ProjectEmployee", new[] { "Project_ProjectID" });
             DropIndex("dbo.Step", new[] { "ProjectID" });
-            DropIndex("dbo.Employee", new[] { "Project_ProjectID" });
             DropIndex("dbo.Assignment", new[] { "ProjectID" });
             DropIndex("dbo.Assignment", new[] { "EmployeeID" });
+            DropTable("dbo.ProjectEmployee");
             DropTable("dbo.Step");
             DropTable("dbo.Project");
             DropTable("dbo.Employee");

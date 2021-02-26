@@ -87,7 +87,7 @@
         });
         $('#btnAddRow').click(function (e) {
             e.preventDefault();
-            var row = "<section id='row1' num='1'><div class='form-group'>&#64Html.LabelFor(model=>model.Steps,'Krok', htmlAttributes: new { @@class = 'control-label col-md-2' })<div class='col-md-8'>@@Html.Editor('StepNames', new { htmlAttributes = new { @@class = 'form-control ', @@style = 'max-width:800px' } })</div></div><div class='form-group'>@@Html.LabelFor(model => model.Steps, 'Dodatkowe informacje', htmlAttributes: new { @@class = 'control-label col-md-2' })<div class='col-md-8'>@@Html.Editor('Infos', new { htmlAttributes = new { @@class = 'form-control', @@style = 'max-width:800px; height:100px' } })</div></section> < input type = 'text' ></div><input type='button' class='RowDelete' value='-' /><hr /></section >";
+            var row = "<section><div style = 'margin:10px;'><label></label><input type='text'></div><div style='margin:10px;'><label></label><input type='text'></div><input type='button' class='RowDelete' value='-'/><hr /></section>";
             $('#prItems').append(row);
             orderRow();
         })
