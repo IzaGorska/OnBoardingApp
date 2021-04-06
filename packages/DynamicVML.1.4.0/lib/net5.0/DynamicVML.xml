@@ -1,0 +1,2395 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DynamicVML</name>
+    </assembly>
+    <members>
+        <member name="T:DynamicVML.AddNewDynamicItem">
+            <summary>
+              Represents the data object that the client can send to the server to request a new partial view for
+              a new list item using ajax. When the controller creates this new partial view, an instance of this 
+              class will be stored in the <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary">ViewData</see> object of the views under 
+              the key <see cref="F:DynamicVML.Internals.Constants.ItemCreateParameters"/>. 
+            </summary>
+            
+            <remarks>
+            <para>
+              An instance of this class should be specified as the single argument of the controller action 
+              that should handle the creation of a new item in your application. In addition, your controller 
+              action must end by calling one of the 
+              <see cref="M:DynamicVML.Extensions.ControllerExtensions.PartialView(Microsoft.AspNetCore.Mvc.Controller,DynamicVML.IDynamicList,DynamicVML.AddNewDynamicItem)"/> 
+              overloads that will take care of rendering the new item for you. An example can be seen below:
+            </para>
+            
+            <code language="csharp">
+            [HttpGet]
+            public IActionResult AddBook(AddNewDynamicItem parameters)
+            {
+                var newBookViewModel = new BookViewModel()
+                {
+                    Title = "New book",
+                    PublicationYear = "1994"
+                };
+            
+                return this.PartialView(newBookViewModel, parameters);
+            }
+            </code>
+            >[!NOTE]
+              Under normal circumstances, this class should never need to be instantiated directly 
+              by your code as it is part of the inner workings of the library.
+            </remarks>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.ContainerId">
+            <summary>
+              Gets or sets the HTML div ID for the list whose new item should be created for.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.ItemTemplate">
+            <summary>
+              Gets or sets the <see cref="P:DynamicVML.Internals.ListParameters.ItemTemplate"/> to be used when creating the new item.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.ItemContainerTemplate">
+            <summary>
+              Gets or sets the <see cref="P:DynamicVML.Internals.ListParameters.ItemContainerTemplate"/> to be used when creating the new item.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.ListTemplate">
+            <summary>
+              Gets or sets the <see cref="P:DynamicVML.Internals.ListParameters.ListTemplate"/> to be used when creating the new item.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.Prefix">
+            <summary>
+              Gets or sets the HTML prefix to be used when creating the new item.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.Mode">
+            <summary>
+              Gets or sets the <see cref="T:DynamicVML.ListRenderMode"/> to be used when creating the new item.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.AdditionalViewData">
+            <summary>
+              Gets or sets any additional view data which may have been passed by the user when calling the 
+              <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)">Html.ListEditorFor</see> extension method, represented 
+              by an UTF-8 byte array that can be serialized to JSON and posted back to the server.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.AddNewDynamicItem.#ctor(System.String,System.String,System.String,System.String,System.String,DynamicVML.ListRenderMode,System.Object)">
+            <summary>
+              Creates a new instance of <see cref="T:DynamicVML.AddNewDynamicItem"/>.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.AddNewDynamicItem.ToQueryString">
+            <summary>
+              Converts this instance to a GET query string representation that can be sent to the server.
+            </summary>
+            
+            <remarks>
+            >[!WARNING]
+            Additional user data is never included in the query string. See 
+            <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)"/> for more details.
+            </remarks>
+            
+            <returns>
+                An HTTP GET query string containing the key-value pairs of the properties of this class, e.g.:
+                <code language="html">
+                "?containerId=SgDdaDhJ&amp;prefix=MyForm.MyProperty&amp;ListTemplate=MyTemplate"
+                </code>
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.AddNewDynamicItem.ToJSON">
+            <summary>
+              Converts this instance to a JSON representation that can be sent to the server.
+            </summary>
+            
+            <returns>A JSON containing the key-value pairs of the properties of this class.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.AddNewDynamicItem.GetAdditionalViewData">
+            <summary>
+              Gets the additional view data at <see cref="P:DynamicVML.AddNewDynamicItem.AdditionalViewData"/> as a 
+              <see cref="T:System.Collections.Generic.Dictionary`2">Dictionary{string, string}</see>
+              containing the key-value pairs in the <see cref="P:DynamicVML.AddNewDynamicItem.AdditionalViewData"/>.
+            </summary>
+            
+            <returns>
+                A <see cref="T:System.Collections.Generic.Dictionary`2"/> representing the contents 
+                of the <see cref="P:DynamicVML.AddNewDynamicItem.AdditionalViewData"/> property of this class.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.AddNewDynamicItem.#ctor">
+            <summary>
+              Creates a new instance of the <see cref="T:DynamicVML.AddNewDynamicItem"/> class. This
+              is an empty constructor that is necessary to be present in order for
+              <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> deserialize objects of this class correctly.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.AddNewDynamicItem.DisableTraceWarningsForQueryStringsThatContainAdditionalViewData">
+            <summary>
+              Self explanatory.
+            </summary>
+            
+            <remarks>
+              By default, the library will generate a <see cref="M:System.Diagnostics.Trace.TraceWarning(System.String)"/> if you
+              specify any <c>additionalViewData</c> to the <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)"/>
+              method while also specifying the HTTP method as <see cref="F:DynamicVML.NewItemMethod.Get"/>. Setting
+              this static property to <c>false</c> will disable those warnings globally.
+            </remarks>
+            
+        </member>
+        <member name="T:DynamicVML.Options.DynamicListAttribute">
+            <summary>
+              Represents an attribute which you can include in your view model's
+              properties to indicate the property should be rendered as a Dynamic 
+              List. This class inherits from <see cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />.
+            </summary>
+            
+            <remarks>
+            <para>
+            Instead of specifying each of your views to add the extra parameters to `EditorFor()`,
+            you can alternatively configure the DynamicList properties of your view models directly
+            in your view model class definition using this attribute:
+            </para>
+            
+            <code language="csharp">
+            public class AuthorViewModel
+            {
+                public string FirstName { get; set; }
+                public string LastName { get; set; }
+            
+                [Display(Name = "Authored books")]
+                [DynamicList("BookView", 
+                    ItemContainerTemplate = "MyCustomItemContainer", 
+                    ListTemplate = "MyCustomList",
+                    Method = RequestNewItemMethod.Post)]
+                public virtual DynamicList&lt;BookViewModel&gt; Books { get; set; } = 
+                    new DynamicList&lt;BookViewModel&gt;();
+            }
+            </code>
+            
+            >[!NOTE]
+            While this is possible, this is not exactly recommended as one could argue that specifying view 
+            parameters in your view models may add unnecessary coupling between your code and the presentation
+            layer. However, if you **really** want to specify parameters this way, the library will let you do so.
+            </remarks>
+            
+            <seealso cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+            
+        </member>
+        <member name="M:DynamicVML.Options.DynamicListAttribute.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:DynamicVML.Options.DynamicListAttribute"/> class.
+            </summary>
+            
+            <param name="listContainerTemplate">The template for the list container. For more details
+              about the different regions associated with a <see cref="T:DynamicVML.DynamicList`2"/>,
+              please <see cref="T:DynamicVML.Extensions.EditorExtensions"/>.</param>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListAttribute.Mode">
+            <summary>
+              Gets or sets whether the view for your viewmodel should receive a @model of type
+              <c>YourOptions&lt;YourViewModel&gt;</c> or simply <c>YourViewModel</c>. Default is to
+              use <see cref="F:DynamicVML.ListRenderMode.ViewModelOnly"/> (so your view will receive just
+              your view model, without its associated options object.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListAttribute.ListContainerTemplate">
+            <summary>
+              Gets or sets the list container template to be used when displaying a list
+              for this attribute. For more details about the different regions associated 
+              with a <see cref="T:DynamicVML.DynamicList`2"/>, please 
+              <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListAttribute.ListTemplate">
+            <summary>
+              Gets or sets the list template to be used when displaying a list
+              for this attribute. For more details about the different regions associated 
+              with a <see cref="T:DynamicVML.DynamicList`2"/>, please 
+              <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListAttribute.ItemContainerTemplate">
+            <summary>
+              Gets or sets the item container template to be used when displaying a list
+              for this attribute. For more details about the different regions associated 
+              with a <see cref="T:DynamicVML.DynamicList`2"/>, please 
+              <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListAttribute.ItemTemplate">
+            <summary>
+              Gets or sets the item template to be used when displaying a list for this attribute. 
+              This should normally be your view for the view models you are using. If you do not specify
+              a view name, the library will attempt to find one based on your view model's class name. For 
+              more details about the different regions associated with a <see cref="T:DynamicVML.DynamicList`2"/>,
+              please <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListAttribute.Method">
+            <summary>
+              Gets or sets whether to use <see cref="F:DynamicVML.NewItemMethod.Get">GET</see> or 
+              <see cref="F:DynamicVML.NewItemMethod.Post">POST</see> when requesting new list items
+              from the server. Default is to use <see cref="F:DynamicVML.NewItemMethod.Get">GET</see>.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Options.DynamicListDisplayOptions">
+            <summary>
+              Represents different options that can be used when displaying a <see cref="T:DynamicVML.DynamicList`2"/>.
+              Instances of this class are normally created internally by the library when calling the 
+              <see cref="M:DynamicVML.Extensions.EditorExtensions.DisplayListFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode)">
+              Html.DisplayFor</see> extension method provided by this library.
+            </summary>
+            
+            <remarks>
+              An instance of this class may be present in the ViewData dictionaries for your view. If you would like 
+              to access this object, use the value of <see cref="F:DynamicVML.Internals.Constants.ItemDisplayParameters"/> as the ViewData key.
+            </remarks>
+            
+            <seealso cref="T:DynamicVML.Options.DynamicListEditorOptions"/>
+            
+        </member>
+        <member name="T:DynamicVML.Options.DynamicListEditorOptions">
+            <summary>
+              Represents different options that can be used when displaying a <see cref="T:DynamicVML.DynamicList`2"/>
+              for edigint. Instances of this class are normally created internally by the library when calling the 
+              <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)">
+              Html.EditorFor</see> extension method provided by this library.
+            </summary>
+            
+            <remarks>
+              An instance of this class may be present in the ViewData dictionaries for your view. If you would like 
+              to access this object, use the value of <see cref="F:DynamicVML.Internals.Constants.ListEditorParameters"/> as the ViewData key.
+            </remarks>
+            
+            <seealso cref="T:DynamicVML.Options.DynamicListDisplayOptions"/>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListEditorOptions.AddNewItemText">
+            <summary>
+              Gets or sets the text that gets displayed on the "Add New Item" link that will
+              call the server to dynamically add a new item to the list. The default is to
+              use "Add new {name of your view model}".
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListEditorOptions.ActionUrl">
+            <summary>
+              Gets or sets the path to your controller's action which will be responsible for
+              rendering a new item to be added to the list. Please see the sample applications
+              for an example on how they are set up.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListEditorOptions.Method">
+            <summary>
+              Gets or sets whether to use <see cref="F:DynamicVML.NewItemMethod.Get">GET</see> or 
+              <see cref="F:DynamicVML.NewItemMethod.Post">POST</see> when requesting new list items
+              from the server. Default is to use <see cref="F:DynamicVML.NewItemMethod.Get">GET</see>.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Options.DynamicListOptions">
+            <summary>
+              Base class for <see cref="T:DynamicVML.Options.DynamicListDisplayOptions"/> and <see cref="T:DynamicVML.Options.DynamicListEditorOptions"/>.
+            </summary>
+            
+            <remarks>
+            <para>
+              The properties of this class specify templates for different regions of the dynamic list when
+              it gets rendered into a view. A quick reference for the regions can be seen in the figure below:
+            </para>
+            
+            <img src="~\images\templates.png"/>
+            </remarks>
+            
+            <seealso cref="T:DynamicVML.Options.DynamicListEditorOptions"/>
+            <seealso cref="T:DynamicVML.Options.DynamicListDisplayOptions"/>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListOptions.ItemTemplate">
+            <summary>
+              Gets or sets the item template to be used when displaying a list for this attribute. 
+              This should normally be your view for the view models you are using. If you do not specify
+              a view name, the library will attempt to find one based on your view model's class name. For 
+              more details about the different regions associated with a <see cref="T:DynamicVML.DynamicList`2"/>,
+              plase <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListOptions.ItemContainerTemplate">
+            <summary>
+              Gets or sets the item container template to be used when displaying a list
+              for this attribute. For more details about the different regions associated 
+              with a <see cref="T:DynamicVML.DynamicList`2"/>, please 
+              <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListOptions.ListTemplate">
+            <summary>
+              Gets or sets the list template to be used when displaying a list
+              for this attribute. For more details about the different regions associated 
+              with a <see cref="T:DynamicVML.DynamicList`2"/>, please 
+              <see cref = "T:DynamicVML.Extensions.EditorExtensions" />.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Options.DynamicListOptions.Mode">
+            <summary>
+              Gets or sets whether the view for your viewmodel should receive a @model of type
+              <c>YourOptions{YourViewModel}</c> or simply <c>YourViewModel</c>. Default is to
+              use <see cref="F:DynamicVML.ListRenderMode.ViewModelOnly"/> (so your view will receive just
+              your view model, without its associated options object.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.ListRenderMode">
+            <summary>
+               Represents different rendering modes for the final (user-provided) item template.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.ListRenderMode.ViewModelOnly">
+            <summary>
+              The final user-provided item template expects an instance of their 
+              view model as the MVC <c>@model</c> class (e.g., "BookViewModel").
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.ListRenderMode.ViewModelWithOptions">
+            <summary>
+              The final user-provided item template expects an instance of their 
+              custom options for their view model as the MVC <c>@model</c> class
+              (e.g., "TOptions&lt;BookViewModel&gt;").
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.NewItemMethod">
+            <summary>
+              Represents different HTTP methods which can be used to retrieve new
+              list items from the server. Default is to use <see cref="F:DynamicVML.NewItemMethod.Get"/>.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.NewItemMethod.Get">
+            <summary>
+              New items should be requested via GET.
+            </summary>
+            
+            <remarks>
+              Note: Additional user view data will not be sent to/from the server when using GET
+              since the additional data may be too long to be included in a GET request. In this
+              case, please switch over to <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </remarks>
+            
+        </member>
+        <member name="F:DynamicVML.NewItemMethod.Post">
+            <summary>
+              New items should be requested via POST.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.DynamicListItem`1">
+            <summary>
+              Represents a list item containing a <typeparamref name="TViewModel"/> for
+              the item and its associated options.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of view model to be stored in this item.</typeparam>
+            
+            <seealso cref="T:DynamicVML.IDynamicListItem`1" />
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListItem`1.ViewModel">
+            <summary>
+              Gets or sets the view model stored in this item.
+            </summary>
+            
+            <value>The view model.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListItem`1.Index">
+            <summary>
+              This property is needed by the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> in order
+              to bind this item correctly to the HTML form. It does not have to
+              be set manually and will likely be overwritten by the rest of the
+              library.
+            </summary>
+            
+            <value>The index of the item, represented as a GUID value formatted as a HTML-friendly string.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListItem`1.DynamicVML#IDynamicListItem#ViewModel">
+            <summary>
+              Gets the view model associated with this item as an object.
+            </summary>
+            
+            <remarks>
+              This property is only visible when handling this item through the non-generic
+              <see cref="T:DynamicVML.IDynamicListItem"/> interface, which normally should be
+              the case only when acessing this item from a view (e.g. list templates).
+            </remarks>
+            
+            <value>The view model.</value>
+            
+        </member>
+        <member name="T:DynamicVML.DynamicList`1">
+            <summary>
+              Represents a list of view model objects that can be added and removed from a form through Ajax.
+              This class can be used to create lists of view models that contain no custom options. To specify
+              custom options for your objects, see <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            
+            <seealso cref="T:DynamicVML.DynamicList`2" />
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`1.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:DynamicVML.DynamicList`2"/> class. This
+              constructor overload is only used when creating a new item to be added to an existing form in
+              an HTML page.
+            </summary>
+            
+            <param name="containerId">
+                The ID of the HTML div element to which the 
+                contents of this list should be appended to.
+            </param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`1.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:DynamicVML.DynamicList`2"/> class.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`1.Contains(`0)">
+            <summary>
+              Determines whether the this list contains a specific value by iterating over all elements of the list.
+            </summary>
+            
+            <param name="item">The object to locate in the list.</param>
+            
+            <returns>
+              <see langword="true" /> if <paramref name="item" /> is found 
+              in the list; otherwise, <see langword="false" />.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`1.CopyTo(`0[],System.Int32)">
+            <summary>
+              Copies the elements of this list to an <see cref="T:System.Array" />, starting at
+              a particular <see cref="T:System.Array" /> index.
+            </summary>
+            
+            <param name="array">The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying begins.</param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`1.Remove(`0)">
+            <summary>
+              Removes the item with the same key specified in the <see cref="P:DynamicVML.IDynamicListItem.Index"/> 
+              property of the provided <paramref name="item"/>.
+            </summary>
+            
+            <param name="item">The object to remove from the list.</param>
+            
+            <returns>
+              <see langword="true" /> if <paramref name="item" /> was successfully
+              removed from the list; otherwise, <see langword="false" />. This method also 
+              returns <see langword="false" /> if <paramref name="item" /> is not found in
+              the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+            </returns>
+            
+        </member>
+        <member name="T:DynamicVML.DynamicList`2">
+            <summary>
+              Represents a list of view model objects that can be added and removed from a form through Ajax.
+              This class can be used to create lists of view models that contain custom options for your items.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            <typeparam name="TOptions">The options class type containing the additional options
+                you might want to specify, e.g., "Title", or "Subtitle".</typeparam>
+            
+            <seealso cref="T:DynamicVML.DynamicList`1" />
+            
+            <remarks>
+            <para>
+              This class implements <see cref="T:System.Collections.Generic.ICollection`1" />, 
+              <see cref="T:System.Collections.Generic.ICollection`1" />, <see cref="T:DynamicVML.IDynamicList`1" />,
+              and <see cref="T:DynamicVML.IDynamicList" />. 
+            </para>
+            <para>
+              This class represents a list of HTML elements, but is actually implemented 
+              as a <see cref="T:System.Collections.Generic.Dictionary`2"/> of unique div HTML element IDs and 
+              their associated <see typeparamref="TOptions"/> objects and the <see cref="P:DynamicVML.IDynamicListItem`1.ViewModel">
+              view models</see> contained inside them.
+            </para>
+            
+            >[!NOTE]
+              If you see yourself implementing many properties in your view model using this class,
+              you might notice that your properties' type names will start to look a bit <i>too</i> long. In
+              that case, you can subclass <see cref="T:DynamicVML.DynamicList`2"/> and create a type
+              that either always implements your custom options, or always use your desired view model. You 
+              can then use this subclass in as the property type of your view model collections instead of
+              <see cref="T:DynamicVML.DynamicList`2"/>. This should reduce the length of your property 
+              names significantly.
+            </remarks>
+            
+            <seealso cref="T:System.Collections.Generic.ICollection`1" />
+            <seealso cref="T:DynamicVML.IDynamicList`1" />
+            <seealso cref="T:DynamicVML.IDynamicList" />
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.Dictionary">
+            <summary>
+              Gets or sets the internal dictionary that is used to store 
+              <see typeparamref="TOptions"/> by their HTML div id key.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.#ctor(System.String)">
+            <summary>
+              Initializes a new instance of the <see cref="T:DynamicVML.DynamicList`2"/> class. This
+              constructor overload is only used when creating a new item to be added to an existing form in
+              an HTML page.
+            </summary>
+            
+            <param name="containerId">
+                The ID of the HTML div element to which the 
+                contents of this list should be appended to.
+            </param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.#ctor">
+            <summary>
+              Initializes a new instance of the <see cref="T:DynamicVML.DynamicList`2"/> class.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.CreateId">
+            <summary>
+              This method creates an unique identified that can be used to identify
+              HTML div elements in your form. Those IDs are needed in order to help
+              ASP.NET's ASP.NET's <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> bind the dynamic view 
+              models to your forms.
+            </summary>
+            
+            <returns>A string containing a GUID value in a HTML-friendly format.</returns>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.Keys">
+            <summary>
+              Gets an enumerable that can be used to iterate through the identifiers
+              of the div HTML elements used by your view models when rendered in a form.
+            </summary>
+            
+            <value>The keys, represented as an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.ViewModels">
+            <summary>
+              Gets an enumerable that can be used to iterate through your ViewModel objects
+              that may be contained in this list.
+            </summary>
+            
+            <value>The view models, represented as an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.Options">
+            <summary>
+              Gets an enumerable that can be used to iterate through the Option objects
+              associated with each of your ViewModel objects contained in this list. An
+              Options object contains at least a property called "Index" which is necessary
+              for ASP.NET's <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> to work.
+            </summary>
+            
+            <value>The view models, represented as an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.ContainerId">
+            <summary>
+              The HTML div ID associated with this list. This ID is generated
+              automatically using <see cref="M:DynamicVML.DynamicList`2.CreateId"/> and is guaranteed to
+              be unique.
+            </summary>
+            
+            <value>
+              The identifier for the HTML div element that contains the representation of 
+              this list in an HTML form.
+            </value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.Index">
+            <summary>
+              This property is required to help <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> during runtime
+              and does not have to be set to anything when creating the list.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.Count">
+            <summary>
+              Gets the number of elements contained in this list.
+            </summary>
+            
+            <value>The number of elements in this list.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.IsReadOnly">
+            <summary>
+              Gets a value indicating whether this <see cref="T:System.Collections.Generic.ICollection`1" /> 
+              is read-only. In the case of a <see cref="T:DynamicVML.DynamicList`2"/>, it should always
+              return false.
+            </summary>
+            
+            <value>Always false.</value>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.Item(System.String)">
+            <summary>
+              Gets the <see typeparamref="TOptions"/> object associated with the specified HTML div 
+              ID. Your view models are contained inside the <see typeparamref="TOptions"/> object.
+            </summary>
+            
+            <param name="id">The HTML div id for the element you want to retrieve.</param>
+            
+            <returns>
+                The <see typeparamref="TOptions"/> object containing your ViewModel 
+                plus any additional options associated to it.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.AddRange(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+              Adds multiple elements to this list. Note that, when added, the list
+              may change properties of the <see typeparamref="TOptions"/> object (but not
+              of your view models).
+            </summary>
+            
+            <param name="options">The elements to be added to this list.</param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.AddRange(System.Collections.Generic.IEnumerable{`0},System.Func{`0,`1})">
+            <summary>
+              Adds multiple elements to this list. Note that, when added, the list
+              may change properties of the <see typeparamref="TOptions"/> object (but not
+              of your view models).
+            </summary>
+            
+            <param name="viewModels">The view models to be added to this list.</param>
+            <param name="options">
+                A default <see typeparamref="TOptions"/> creation function that can be used to specify
+                options associated with each of your view models. This is optional.
+            </param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.Add(`1)">
+            <summary>
+              Adds the specified <see typeparamref="TOptions"/> object to the list. The
+              <see cref="P:DynamicVML.IDynamicListItem.Index"/> property of your options object
+              may be changed by this method upon insertion.
+            </summary>
+            
+            <remarks>
+              If an item with a duplicate key gets inserted to this list, it will
+              replace the old one with this new instance. This is not the same behavior
+              of a standard <see cref="T:System.Collections.Generic.Dictionary`2"/> but is needed to avoid
+              model binding errors since <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> will call this method
+              to reconstruct the <see cref="T:DynamicVML.DynamicList`2"/> object
+              from the user's HTTP request.
+            </remarks>
+            
+            <param name="options">The options object to be added to this list.</param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.Add(`0)">
+            <summary>
+              Adds the specified <see typeparamref="TViewModel"/> object to the list. The list
+              will automatically create a <see typeparamref="TOptions"/> object to wrap it and
+              provide it with an unique ID.
+            </summary>
+            
+            <param name="viewModel">The view model object to be added to this list.</param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.Add(`0,System.Action{`1})">
+            <summary>
+              Adds the specified <see typeparamref="TViewModel"/> object to the list. The list
+              will automatically create a <see typeparamref="TOptions"/> object to wrap it and
+              provide it with an unique ID.
+            </summary>
+            
+            <param name="viewModel">The view model object to be added to this list.</param>
+            <param name="options">A method that can be used to customize the <typeparamref name="TOptions"/>
+                object that will be used to wrap the <paramref name="viewModel"/> before it gets added
+                to the list. This can be used to specify custom IDs for list items.</param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.Clear">
+            <summary>
+              Removes all items from this list.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.Contains(`1)">
+            <summary>
+              Determines whether the this list contains a specific value. Note that only
+              the <see cref="P:DynamicVML.IDynamicListItem.Index"/> property of the provided <see typeparamref="TOptions"/>
+              object will be used to determine whether the list contains a similar element or not.
+              This method will not look into the actual contents of your options or view model.
+            </summary>
+            
+            <param name="item">The object to locate in the list.</param>
+            
+            <returns>
+              <see langword="true" /> if <paramref name="item" /> is found 
+              in the list; otherwise, <see langword="false" />.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.CopyTo(`1[],System.Int32)">
+            <summary>
+              Copies the elements of this list to an <see cref="T:System.Array" />, starting at
+              a particular <see cref="T:System.Array" /> index.
+            </summary>
+            
+            <param name="array">The one-dimensional <see cref="T:System.Array" /> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1" />. The <see cref="T:System.Array" /> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in <paramref name="array" /> at which copying begins.</param>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.Remove(`1)">
+            <summary>
+              Removes the item with the same key specified in the <see cref="P:DynamicVML.IDynamicListItem.Index"/> 
+              property of the provided <paramref name="item"/>.
+            </summary>
+            
+            <param name="item">The object to remove from the list.</param>
+            
+            <returns>
+              <see langword="true" /> if <paramref name="item" /> was successfully
+              removed from the list; otherwise, <see langword="false" />. This method also 
+              returns <see langword="false" /> if <paramref name="item" /> is not found in
+              the original <see cref="T:System.Collections.Generic.ICollection`1" />.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.GetEnumerator">
+            <summary>
+              Returns an enumerator that iterates through the collection.
+            </summary>
+            
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+              Returns an enumerator that iterates through a collection.
+            </summary>
+            
+            <returns>
+              An <see cref="T:System.Collections.IEnumerator" /> object 
+              that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.ToModel``1(System.Func{`0,``0})">
+            <summary>
+              Converts all view models stored inside this instance to their database model 
+              counterparts using the specified <paramref name="func">lambda function</paramref>.
+            </summary>
+            
+            <typeparam name="TModel">The type for the models to convert to.</typeparam>
+            
+            <param name="func">
+                A function that takes a <see typeparamref="TViewModel"/> 
+                and converts it to a <see typeparamref="TModel"/>.
+            </param>
+            
+            <returns>
+                A <see cref="T:System.Collections.Generic.IEnumerable`1"/> that can be materialized to an actual 
+                list/collection or just iterated over (e.g. using <see cref="N:System.Linq"/>.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.DynamicList`2.ToModel``1(System.Func{`1,``0})">
+            <summary>
+              Converts all view models stored inside this instance to their database model 
+              counterparts using the specified <paramref name="func">lambda function</paramref>.
+              This overload can be used to take the options associated with each view model
+              object into consideration during the conversion.
+            </summary>
+            
+            <typeparam name="TModel">The type for the models to convert to.</typeparam>
+            
+            <param name="func">
+                A function that takes a <see typeparamref="TOptions"/> (which contains a 
+                <see typeparamref="TViewModel"/>) and converts both to a <see typeparamref="TModel"/>.
+            </param>
+            
+            <returns>
+                A <see cref="T:System.Collections.Generic.IEnumerable`1"/> that can be materialized to an actual 
+                list/collection or just iterated over (e.g. using <see cref="N:System.Linq"/>.
+            </returns>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.DynamicVML#IDynamicList{TOptions}#Item(System.String)">
+            <summary>
+              Gets the <see typeparamref="TOptions"/> with the specified identifier.
+            </summary>
+            
+            <remarks>
+                This is an explicit interface implementation which is only available when
+                interacting with this list through the <see typeparamref="IDynamicList{TOptions}"/>
+                interface. Normally, this should only be the case when accessing the list
+                from a view.
+            </remarks>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicList`2.DynamicVML#IDynamicList#Item(System.String)">
+            <summary>
+              Gets the <see typeparamref="TOptions"/> with the specified 
+              identifier as an <see cref="T:DynamicVML.IDynamicListItem"/> object.
+            </summary>
+            
+            <remarks>
+                This is an explicit interface implementation which is only available when
+                interacting with this list through the <see cref="T:DynamicVML.IDynamicList"/>
+                interface. Normally, this should only be the case when accessing the list
+                from a view.
+            </remarks>
+            
+        </member>
+        <member name="T:DynamicVML.DynamicListException">
+            <summary>
+              Represents a common type for exceptions thrown by the library.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.AddNewItemParameters">
+            <summary>
+              Gets the <see cref="T:DynamicVML.AddNewDynamicItem"/> object that was 
+              available in the context that this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.EditorOptions">
+            <summary>
+              Gets values passed as parameters when the method <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)"/>, 
+              was called, if they were available in the context that this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.DisplayOptions">
+            <summary>
+              Gets values passed as parameters when the method <see cref="M:DynamicVML.Extensions.EditorExtensions.DisplayListFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode)"/>, 
+              was called, if they were available in the context that this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.AdditionalViewData">
+            <summary>
+              Gets values passed additional view data to either <see cref="M:DynamicVML.Extensions.EditorExtensions.DisplayListFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode)"/>
+              or <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)"/> were called, if they were available in the context 
+              that this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.DisplayParameters">
+            <summary>
+              Gets the <see cref="T:DynamicVML.Internals.ListDisplayParameters"/> object that was present in the view data when this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.EditorParameters">
+            <summary>
+              Gets the <see cref="T:DynamicVML.Internals.ListEditorParameters"/> object that was present in the view data when this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.ItemDisplayParameters">
+            <summary>
+              Gets the <see cref="P:DynamicVML.DynamicListException.ItemDisplayParameters"/> object that was present in the view data when this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.DynamicListException.ItemEditorParameters">
+            <summary>
+              Gets the <see cref="P:DynamicVML.DynamicListException.ItemEditorParameters"/> object that was present in the view data when this exception was thrown.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Extensions.ControllerExtensions">
+            <summary>
+              Extension methods to help sending back list items from the controllers.
+            </summary>
+            
+            <remarks>
+                Please see the sample applications for examples on how they are used.
+            </remarks>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialViewAsync``1(Microsoft.AspNetCore.Mvc.Controller,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialViewAsync``2(Microsoft.AspNetCore.Mvc.Controller,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem,``1)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialViewAsync``1(Microsoft.AspNetCore.Mvc.Controller,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem,System.Action{DynamicVML.DynamicListItem{``0}})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialViewAsync``2(Microsoft.AspNetCore.Mvc.Controller,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem,System.Action{``1})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialView``2(Microsoft.AspNetCore.Mvc.Controller,``0,DynamicVML.AddNewDynamicItem,``1)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialView``1(Microsoft.AspNetCore.Mvc.Controller,``0,DynamicVML.AddNewDynamicItem,System.Action{DynamicVML.DynamicListItem{``0}})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">An action that allows for configuring the options to be associated 
+                with the new item before it gets inserted to the list.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialView``2(Microsoft.AspNetCore.Mvc.Controller,``0,DynamicVML.AddNewDynamicItem,System.Action{``1})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">An action that allows for configuring the options to be associated 
+                with the new item before it gets inserted to the list.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialView``1(Microsoft.AspNetCore.Mvc.Controller,``0,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Creates the partial view for the item that should be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialView(Microsoft.AspNetCore.Mvc.Controller,DynamicVML.IDynamicList,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Creates the partial view for the item that should be sent back to the client.
+            </summary>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="item">The dynamic list item to be rendered.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ControllerExtensions.PartialViewAsync(Microsoft.AspNetCore.Mvc.Controller,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,DynamicVML.IDynamicList,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <param name="controller">The controller handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="item">The dynamic list item to be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="T:DynamicVML.Extensions.EditorExtensions">
+            <summary>
+              Contains extension methods for rendering different parts of the list from .cshtml view files. 
+            </summary>
+            
+            <remarks>
+            <para>
+              The methods in this class can be used to render different regions of a dynamic list 
+              from within a view. A quick reference for the regions can be seen in the figure below:
+            </para>
+            
+            <img src="~\images\templates.png"/>
+            </remarks>
+            
+            <summary>
+              Contains extension methods for rendering different parts of the list from .cshtml view files. 
+            </summary>
+            
+            <remarks>
+            <para>
+              The methods in this class can be used to render different regions of a dynamic list 
+              from within a view. A quick reference for the regions can be seen in the figure below:
+            </para>
+            
+            <img src="~\images\templates.png"/>
+            </remarks>
+            
+             <summary>
+               Contains extension methods for rendering different parts of the list from .cshtml view files.
+             </summary>
+            
+             <remarks>
+             <para>
+               The methods in this class can be used to render different regions of a dynamic list
+               from within a view. A quick reference for the regions can be seen in the figure below:
+             </para>
+            
+             <img src="~\images\templates.png"/>
+             </remarks>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.DisplayListFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode)">
+            <summary>
+              Renders a dynamic list for display. Please see the image in the remarks section for 
+              a quick understanding of all the different templates that can be specified.
+            </summary>
+            
+            <remarks>
+            <img src="~\images\templates.png"/>
+            </remarks>
+            
+            <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            <typeparam name="TValue">The list to be displayed.</typeparam>
+            
+            <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+            <param name="propertyExpression">An expresion to be evaluated against the current model.</param>
+            <param name="itemTemplate">The view name for the view models to be displayed.</param>
+            <param name="itemContainerTemplate">The template for the "DynamicItemContainer" part of the list.</param>
+            <param name="mode">The <see cref="T:DynamicVML.ListRenderMode"/> to be used when rendering the template
+              for your view model. Please see the <see cref="T:DynamicVML.ListRenderMode"/> for more details.</param>
+            <param name="listTemplate">The template for the "DynamicList" part of the list.</param>
+            <param name="listContainerTemplate">The template for the "DynamicListContainer" part of the list.</param>
+            <param name="additionalViewData">An anonymous object or <see cref="T:System.Collections.Generic.Dictionary`2"/> that can
+                contain additional view data that will be merged into the <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/>
+                instance created for the template.</param>
+            
+            <returns>The rendered HTML for the list.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicListDisplay``1(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0})">
+            <summary>
+              Renders the "DynamicList" part of the list to the view. Please see the image in
+              <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of 
+              which part this refers to.
+            </summary>
+            
+            <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            
+            <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+            
+            <returns>An awaitable async task.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicItemContainerDisplay``1(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.String)">
+            <summary>
+              Renders the "DynamicItemContainer" part of the list to the view. Please see the image
+              in the <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of 
+              which part this refers to.
+            </summary>
+            
+            <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            
+            <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+            <param name="itemId">The div id (key of the item in the <see cref="T:DynamicVML.DynamicList`2"/>)
+              for the current item being rendered.</param>
+            
+            <returns>An awaitable async task.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicItemDisplay``1(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0})">
+            <summary>
+              Renders the "Item" part of the list to the view. This corresponds to your actual
+              user-provided view for your current viewmodel. Please see the image in
+              <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of 
+              which part this refers to.
+            </summary>
+            
+            <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            
+            <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+            
+            <returns>An awaitable async task.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.GetDynamicListActionUrl(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{DynamicVML.IDynamicList})">
+             <summary>
+               Gets a string with information about how request a new item from the server.
+               Please see <see cref="M:DynamicVML.Internals.ListEditorParameters.GetActionInfo"/> for more information.
+             </summary>
+            
+             <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> associated with the current view.</param>
+            
+             <returns>A string containing information to be passed to the JavaScript scripts.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)">
+             <summary>
+               Renders a dynamic list for display. Please see the image in the
+               <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of
+               which part this refers to.
+             </summary>
+            
+             <remarks>
+             >[!WARNING]
+               The <paramref name="additionalViewData"/>
+               object will not be sent back to the server when the user clicks the "Add new item" button if
+               <paramref name="method"/> is also set to <see cref="F:DynamicVML.NewItemMethod.Get"/>. However, it will
+               still be passed to the templates during the first rendering of the list. In order to be able
+               to receive the additional data from the controller, please also specify
+               <paramref name="method"/>: <c>NewItemMethod.Post</c>.
+             </remarks>
+            
+             <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+             <typeparam name="TValue">The list to be displayed.</typeparam>
+            
+             <param name="actionUrl">The path to the controller action responsible for generating the view for a new item.</param>
+             <param name="addNewItemText">The text to be displayed in the button that the user can click to add a new item to the list.</param>
+             <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+             <param name="propertyExpression">An expresion to be evaluated against the current model.</param>
+             <param name="itemTemplate">The view name for the view models to be displayed.</param>
+             <param name="itemContainerTemplate">The template for the "DynamicItemContainer" part of the list.</param>
+             <param name="mode">The <see cref="T:DynamicVML.ListRenderMode"/> to be used when rendering the template
+               for your view model. Please see the <see cref="T:DynamicVML.ListRenderMode"/> for more details.</param>
+             <param name="listTemplate">The template for the "DynamicList" part of the list.</param>
+             <param name="method">The <see cref="T:DynamicVML.NewItemMethod"/> to use, whether
+                 <see cref="F:DynamicVML.NewItemMethod.Get"/> or <see cref="F:DynamicVML.NewItemMethod.Post"/>.</param>
+             <param name="listContainerTemplate">The template for the "DynamicListContainer" part of the list.</param>
+             <param name="additionalViewData">An anonymous object or <see cref="T:System.Collections.Generic.Dictionary`2"/> that can
+                 contain additional view data that will be merged into the <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/>
+                 instance created for the template.</param>
+            
+             <returns>The rendered HTML for the list.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicItemContainerEditor``1(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.String)">
+             <summary>
+               Renders the "DynamicItemContainer" part of the list to the view. Please see the image in
+               <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of
+               which part this refers to.
+             </summary>
+            
+             <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            
+             <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+             <param name="itemId">The div id (key of the item in the <see cref="T:DynamicVML.DynamicList`2"/>)
+               for the current item being rendered.</param>
+            
+             <returns>An awaitable async task.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicItemEditor``1(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0})">
+             <summary>
+               Renders the "Item" part of the list to the view. This corresponds to your actual
+               user-provided view for your current viewmodel. Please see the image in
+               <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of
+               which part this refers to.
+             </summary>
+            
+             <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            
+             <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+            
+             <returns>An awaitable async task.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicListAddNewItemText(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{DynamicVML.IDynamicList})">
+             <summary>
+               Renders the "Add new item" text that have been defined in the
+               <see cref="P:DynamicVML.Options.DynamicListEditorOptions.AddNewItemText"/> to the view.
+             </summary>
+            
+             <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> associated with the current view.</param>
+            
+             <returns>A string containing the specified text, e.g., "Add new book".</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EditorExtensions.RenderDynamicListEditor``1(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0})">
+             <summary>
+               Renders the "DynamicList" part of the list to the view. Please see the image in
+               <see cref="T:DynamicVML.Extensions.EditorExtensions"/> remarks section to get a quick understanding of
+               which part this refers to.
+             </summary>
+            
+             <typeparam name="TModel">The type of the model object in your current view.</typeparam>
+            
+             <param name="html">The <see cref="T:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper`1"/> from your current view.</param>
+            
+             <returns>An awaitable async task.</returns>
+            
+        </member>
+        <member name="T:DynamicVML.Extensions.EnumerableExtensions">
+            <summary>
+              Contains extension methods to convert view models and option objects to 
+              <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(``0,System.String,``1)">
+            <summary>
+              Wraps a single view model into a partial dynamic list that can be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="viewModel">The view model to be wrapped in a partial dynamic list.</param>
+            <param name="containerId">The div ID of the already existing dynamic list container.</param>
+            <param name="options">The options to be associated with your view model. Note that this
+              method will set the <see cref="P:DynamicVML.DynamicListItem`1.ViewModel"/> property
+              of the given <paramref name="options"/> object to the given <paramref name="viewModel"/>.</param>
+            
+            <returns>A partial dynamic list with a single item that can be passed to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``1(``0,System.String)">
+            <summary>
+              Wraps a single view model into a partial dynamic list that can be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            
+            <param name="viewModel">The view model to be wrapped in a partial dynamic list.</param>
+            <param name="containerId">The div ID of the already existing dynamic list container.</param>
+            
+            <returns>A partial dynamic list with a single item that can be passed to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(``0,System.String,System.Func{``0,``1})">
+            <summary>
+              Wraps a single view model into a partial dynamic list that can be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="viewModel">The view model to be wrapped in a partial dynamic list.</param>
+            <param name="containerId">The div ID of the already existing dynamic list container.</param>
+            <param name="optionsSelector">A function that can be used to define how your view model
+              should be wrapped in a <typeparamref name="TOptions"/> object.</param>
+            
+            <returns>A partial dynamic list with a single item that can be passed to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``3(``2,System.String,System.Func{``2,``0},System.Func{``2,``1})">
+            <summary>
+              Wraps a single view model into a partial dynamic list that can be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TModel">The type of your (database) model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="model">The database model to be converted in a view model and wrapped in a partial dynamic list.</param>
+            <param name="containerId">The div ID of the already existing dynamic list container.</param>
+            <param name="optionsSelector">A function that can be used to define how your view model
+              should be wrapped in a <typeparamref name="TOptions"/> object.</param>
+            <param name="viewModelSelector">A function that can be used to define how your view model
+              should be created from your model.</param>
+            
+            <returns>A partial dynamic list with a single item that can be passed to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(``1,System.String,System.Func{``1,``0})">
+            <summary>
+              Wraps a single view model into a partial dynamic list that can be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TModel">The type of your (database) model.</typeparam>
+            
+            <param name="model">The database model to be converted in a view model and wrapped in a partial dynamic list.</param>
+            <param name="containerId">The div ID of the already existing dynamic list container.</param>
+            <param name="viewModelSelector">A function that can be used to define how your view model
+              should be created from your model.</param>
+            
+            <returns>A partial dynamic list with a single item that can be passed to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``3(``2,System.String,System.Func{``2,``1})">
+            <summary>
+              Wraps a single view model into a partial dynamic list that can be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TModel">The type of your (database) model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="model">The database model to be converted in a view model and wrapped in a partial dynamic list.</param>
+            <param name="containerId">The div ID of the already existing dynamic list container.</param>
+            <param name="optionsSelector">A function that can be used to define how your view model
+              should be wrapped in a <typeparamref name="TOptions"/> object.</param>
+            
+            <returns>A partial dynamic list with a single item that can be passed to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+              Converts a list of <typeparamref name="TOptions"/> objects into
+              a <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="options">The list of options objects to be added to the list.</param>
+            
+            <returns>A <see cref="T:DynamicVML.DynamicList`2"/> containing the given <paramref name="options"/>.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+              Converts a list of <typeparamref name="TViewModel"/> objects into
+              a <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="viewModels">The list of viewmodel objects to be wrapped in option objects and then added to the list.</param>
+            
+            <returns>A <see cref="T:DynamicVML.DynamicList`2"/> containing the given <paramref name="viewModels"/>.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(System.Collections.Generic.IEnumerable{``0},System.Func{``0,``1})">
+            <summary>
+              Converts a list of <typeparamref name="TViewModel"/> objects into
+              a <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view model.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view model.</typeparam>
+            
+            <param name="viewModels">The list of viewmodel objects to be wrapped in option objects and then added to the list.</param>
+            <param name="optionsSelector">A function that can be used to configure the <typeparamref name="TOptions"/>
+                associated with each of your <paramref name="viewModels"/>.</param>
+            
+            <returns>A <see cref="T:DynamicVML.DynamicList`2"/> containing the given <paramref name="viewModels"/>.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``3(System.Collections.Generic.IEnumerable{``2},System.Func{``2,``0},System.Func{``2,``1})">
+            <summary>
+              Converts a list of <typeparamref name="TViewModel"/> objects into
+              a <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view models.</typeparam>
+            <typeparam name="TModel">The type of your (database) models.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view models.</typeparam>
+            
+            <param name="models">A list of database models to be converted into view models, wrapped in
+                <typeparamref name="TOptions"/> objects, and then inserted in a dynamic list.</param>
+            <param name="optionsSelector">A function that can be used to define how your view model
+              should be wrapped in a <typeparamref name="TOptions"/> object.</param>
+            <param name="viewModelSelector">A function that can be used to define how your view model
+              should be created from your model.</param>
+              
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``2(System.Collections.Generic.IEnumerable{``1},System.Func{``1,``0})">
+            <summary>
+              Converts a list of <typeparamref name="TViewModel"/> objects into
+              a <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view models.</typeparam>
+            <typeparam name="TModel">The type of your (database) models.</typeparam>
+            
+            <param name="models">A list of database models to be converted into view models, and then 
+            inserted in a dynamic list.</param>
+            <param name="viewModelSelector">A function that can be used to define how your view model
+              should be created from your model.</param>
+              
+        </member>
+        <member name="M:DynamicVML.Extensions.EnumerableExtensions.ToDynamicList``3(System.Collections.Generic.IEnumerable{``2},System.Func{``2,``1})">
+            <summary>
+              Converts a list of <typeparamref name="TViewModel"/> objects into
+              a <see cref="T:DynamicVML.DynamicList`2"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of your view models.</typeparam>
+            <typeparam name="TModel">The type of your (database) models.</typeparam>
+            <typeparam name="TOptions">The type of the options to be associated with your view models.</typeparam>
+            
+            <param name="models">A list of database models to be converted into view models, wrapped in
+                <typeparamref name="TOptions"/> objects, and then inserted in a dynamic list.</param>
+            <param name="optionsSelector">A function that can be used to define how your view model
+              should be wrapped in a <typeparamref name="TOptions"/> object.</param>
+              
+        </member>
+        <member name="T:DynamicVML.Extensions.PageExtensions">
+            <summary>
+              Extension methods to help sending back list items from the controllers.
+            </summary>
+            
+            <remarks>
+                Please see the sample applications for examples on how they are used.
+            </remarks>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.PartialAsync``1(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.PartialAsync``2(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem,``1)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.PartialAsync``1(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem,System.Action{DynamicVML.DynamicListItem{``0}})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.PartialAsync``2(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,``0,DynamicVML.AddNewDynamicItem,System.Action{``1})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.Partial``2(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,``0,DynamicVML.AddNewDynamicItem,``1)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">Any additional options you might want to specify for this item.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.Partial``1(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,``0,DynamicVML.AddNewDynamicItem,System.Action{DynamicVML.DynamicListItem{``0}})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">An action that allows for configuring the options to be associated 
+                with the new item before it gets inserted to the list.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.Partial``2(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,``0,DynamicVML.AddNewDynamicItem,System.Action{``1})">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            <typeparam name="TOptions">The options associated with the view model.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="options">An action that allows for configuring the options to be associated 
+                with the new item before it gets inserted to the list.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.Partial``1(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,``0,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Creates the partial view for the item that should be sent back to the client.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model whose view should be rendered.</typeparam>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="viewModel">The view model whose view should be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.Partial(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,DynamicVML.IDynamicList,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Creates the partial view for the item that should be sent back to the client.
+            </summary>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            <param name="item">The dynamic list item to be rendered.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.PageExtensions.PartialAsync(Microsoft.AspNetCore.Mvc.RazorPages.PageModel,Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine,DynamicVML.IDynamicList,DynamicVML.AddNewDynamicItem)">
+            <summary>
+               Renders a partial view containing the item to be in plain HTML,
+               and converts it to JSON so it can be sent back to the client. You should
+               only use this method when using <see cref="F:DynamicVML.NewItemMethod.Post"/>.
+            </summary>
+            
+            <param name="pageModel">The page model handling the action for creating the new item.</param>
+            <param name="engine">An instance of the <see cref="T:Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine"/> class (which 
+              can be obtained using dependency injection by asking it as a new parameter in your 
+              controllers' constructor)</param>
+            <param name="item">The dynamic list item to be rendered.</param>
+            <param name="parameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> received by the controller.</param>
+            
+            <returns>An <see cref="T:Microsoft.AspNetCore.Mvc.ActionResult"/> to be sent back to the client.</returns>
+            
+        </member>
+        <member name="T:DynamicVML.Extensions.ViewDataExtensions">
+            <summary>
+              Contains extension methods for extracting and storing information
+              related to <see cref="T:DynamicVML.DynamicList`2">DynamicLists</see>
+              from <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/> objects.
+            </summary>
+            
+            <summary>
+              Contains extension methods for extracting and storing information
+              related to <see cref="T:DynamicVML.DynamicList`2">DynamicLists</see>
+              from <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/> objects.
+            </summary>
+            
+            <summary>
+              Contains extension methods for extracting and storing information
+              related to <see cref="T:DynamicVML.DynamicList`2">DynamicLists</see>
+              from <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/> objects.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetDynamicListAttribute(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary)">
+            <summary>
+              Attempts to extract a <see cref="T:DynamicVML.Options.DynamicListAttribute"/> from the model's
+              metadata stored in the <see cref="P:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary.Model"/> property.
+            </summary>
+            
+            <param name="viewData">The view data containing the metadata to be inspected.</param>
+            
+            <returns>A <see cref="T:DynamicVML.Options.DynamicListAttribute"/> object if one is set; otherwise null.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetListDisplayParameters(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary,System.String)">
+            <summary>
+              Builds a new <see cref="T:DynamicVML.Internals.ListDisplayParameters"/> object gathering information from different
+              sources, including <see cref="T:DynamicVML.Options.DynamicListDisplayOptions"/> objects that may be stored in the
+              view data, <see cref="T:DynamicVML.Options.DynamicListAttribute"/> attributes defined in the view model class,
+              or, as a last resort, reflection.
+            </summary>
+            
+            <remarks>
+            >[!WARNING]
+              This method will resort to reflecion in case the <see cref="P:DynamicVML.Options.DynamicListOptions.ItemTemplate"/>,
+              <see cref="P:DynamicVML.Options.DynamicListEditorOptions.ActionUrl"/>, or <see cref="P:DynamicVML.Options.DynamicListEditorOptions.AddNewItemText"/>
+              have not been specified, which can incur
+              a significant performance impact on the server. To avoid the extra performance hit, specify the name 
+              of the view you want to use for your view model when calling <see cref="M:DynamicVML.Extensions.EditorExtensions.DisplayListFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode)"/>
+            </remarks>
+            
+            <param name="viewData">The view data object from where information will be extracted.</param>
+            <param name="containerId">The HTML div element ID for the current list.</param>
+            
+            <returns>
+                A new <see cref="T:DynamicVML.Internals.ListDisplayParameters"/> object with the actual values to be 
+                used when rendering the editor view for your view model.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetItemDisplayParameters(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary,System.String,System.String)">
+            <summary>
+              Retrieves the <see cref="T:DynamicVML.Internals.ItemDisplayParameters"/> object stored in the <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/>.
+              If no <see cref="T:DynamicVML.Internals.ItemDisplayParameters"/> is available, a new one will be created from the information 
+              stored in the <see cref="T:DynamicVML.Internals.ListDisplayParameters"/> object that should have been stored in the ViewData. 
+            </summary>
+            
+            <param name="viewData">The view data object from where information will be extracted.</param>
+            <param name="containerId">The HTML div element ID for the current list.</param>
+            <param name="itemId">The HTML div element ID for the current list item.</param>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetListEditorParameters(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary,System.String)">
+            <summary>
+              Builds a new <see cref="T:DynamicVML.Internals.ListEditorParameters"/> object gathering information from different
+              sources, including <see cref="T:DynamicVML.Options.DynamicListEditorOptions"/> objects that may be stored in the
+              view data, <see cref="T:DynamicVML.Options.DynamicListAttribute"/> attributes defined in the view model class,
+              or, as a last resort, reflection.
+            </summary>
+            
+            <remarks>
+            >[!WARNING]
+              This method will resort to reflecion in case the <see cref="P:DynamicVML.Options.DynamicListOptions.ItemTemplate"/>
+              has not been specified, which can incur a significant performance impact on the server. To avoid the 
+              extra performance hit, specify the name of the view you want to use for your view model when calling
+              <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)"/>
+            </remarks>
+            
+            <param name="viewData">The view data object from where information will be extracted.</param>
+            <param name="containerId">The HTML div element ID for the current list.</param>
+            
+            <returns>
+                A new <see cref="T:DynamicVML.Internals.ListEditorParameters"/> object with the actual values
+                to be used when rendering the editor view for your view model.
+            </returns>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetItemEditorParameters(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary,System.String,System.String)">
+            <summary>
+              Retrieves the <see cref="T:DynamicVML.Internals.ItemEditorParameters"/> object stored in the <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/>.
+              If no <see cref="T:DynamicVML.Internals.ItemEditorParameters"/> is available, a new one will be created from the information 
+              stored in the <see cref="T:DynamicVML.Internals.ListEditorParameters"/> object that should have been stored in the ViewData. 
+            </summary>
+            
+            <param name="viewData">The view data object from where information will be extracted.</param>
+            <param name="containerId">The HTML div element ID for the current list.</param>
+            <param name="itemId">The HTML div element ID for the current list item.</param>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetItemEditorParameters(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary,System.String,DynamicVML.AddNewDynamicItem,DynamicVML.NewItemMethod)">
+            <summary>
+              Re-creates a <see cref="T:DynamicVML.Internals.ItemEditorParameters"/> from the partial information about the original list
+              contained in a <see cref="T:DynamicVML.AddNewDynamicItem"/> object. This information will be stored in the
+              <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary"/> in order to make the rest of the code work the same as much as
+              possible.
+            </summary>
+            
+            <param name="viewData">The view data object from where information will be extracted.</param>
+            <param name="itemId">The HTML div element ID for the current list item.</param>
+            <param name="method">The HTTP method used when calling the controller to add new items to the list.</param>
+            <param name="newItemParameters">The <see cref="T:DynamicVML.AddNewDynamicItem"/> parameters containing information
+                about how the controller should create new items to be added to the list.</param>
+            
+        </member>
+        <member name="M:DynamicVML.Extensions.ViewDataExtensions.GetItemCreateParameters(Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary,System.String)">
+            <summary>
+              Extracts a <see cref="T:DynamicVML.AddNewDynamicItem"/> object from a <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary">ViewData</see>
+              dictionary.
+            </summary>
+            
+            <param name="viewData">
+                The view data dictionary that should contain the object. If the object is
+                not present, an <see cref="T:System.ApplicationException"/> will be thrown.
+            </param>
+            <param name="itemId">The HTML div ID for the current list item.</param>
+            
+            <returns>The <see cref="T:DynamicVML.AddNewDynamicItem"/> stored in the view data.</returns>
+            
+        </member>
+        <member name="T:DynamicVML.IDynamicList">
+            <summary>
+              Represents a list whose items are tracked by a string key associated with
+              the id of div elements in an HTML form, and whose items can be succesfully
+              binded to object properties by ASP.NET's default <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/>. 
+            </summary>
+            
+            <remarks>
+                This is the non-generic version of <see cref="T:DynamicVML.IDynamicList`1"/> which
+                can be used whenever list item types do not need to be known. This will
+                usually be the case when acessing the dynamic list from a template view.
+            </remarks>
+            
+            <seealso cref="T:DynamicVML.IDynamicListItem`1"/>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicList.Count">
+            <summary>
+              Gets the number of elements contained in this list.
+            </summary>
+            
+            <value>The number of elements in this list.</value>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicList.ContainerId">
+            <summary>
+              The HTML div ID associated with this list. This ID is generated
+              automatically using the <see cref="M:DynamicVML.DynamicList`2.CreateId"/> 
+              method and is guaranteed to be unique.
+            </summary>
+            
+            <value>
+              The identifier for the HTML div element that contains
+              the representation of this list in an HTML form.
+            </value>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicList.Index">
+            <summary>
+              This property is required to help <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> during runtime
+              and does not have to be set to anything when creating the list.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicList.Keys">
+            <summary>
+              Gets an enumerable that can be used to iterate through the identifiers
+              of the div HTML elements used by your view models when rendered in a form.
+            </summary>
+            
+            <value>The keys, represented as an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</value>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicList.Item(System.String)">
+            <summary>
+              Gets the <see typeparamref="TOptions"/> with the specified 
+              identifier as an <see cref="T:DynamicVML.IDynamicListItem"/> object.
+            </summary>
+            
+            <remarks>
+                This is an explicit interface implementation which is only available when
+                interacting with this list through the <see cref="T:DynamicVML.IDynamicList"/>
+                interface. Normally, this should only be the case when accessing the list
+                from a view.
+            </remarks>
+            
+        </member>
+        <member name="T:DynamicVML.IDynamicList`1">
+            <summary>
+              Represents a list whose items are tracked by a string key associated with
+              the id of div elements in an HTML form, and whose items can be succesfully
+              binded to object properties by ASP.NET's default <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/>. 
+            </summary>
+            
+            <remarks>
+                This is the generic version of <see cref="T:DynamicVML.IDynamicList"/> which
+                can be used whenever list item types need to be known. 
+            </remarks>
+            
+            <seealso cref="T:DynamicVML.IDynamicListItem"/>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicList`1.Item(System.String)">
+            <summary>
+              Gets the <see typeparamref="TValue"/> with the specified identifier.
+            </summary>
+            
+            <remarks>
+                This is an explicit interface implementation which is only available when
+                interacting with this list through the <see cref="T:DynamicVML.IDynamicList`1"/>
+                interface. Normally, this should only be the case when accessing the list
+                from a view.
+            </remarks>
+            
+        </member>
+        <member name="T:DynamicVML.IDynamicListItem">
+            <summary>
+              Represents an item stored in a <see cref="T:DynamicVML.DynamicList`2"/> when
+              the type of the view model does not need to be known. This is normally the case when
+              handling the list from inside a list template view.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicListItem.ViewModel">
+            <summary>
+              Gets the view model associated with this item as an object.
+            </summary>
+            
+            <remarks>
+              This property is only visible when handling this item through the non-generic
+              <see cref="T:DynamicVML.IDynamicListItem"/> interface, which normally should be
+              the case only when acessing this item from a view (e.g. list templates).
+            </remarks>
+            
+            <value>The view model.</value>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicListItem.Index">
+            <summary>
+              This property is needed by the <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder"/> in order
+              to bind this item correctly to the HTML form. It does not have to
+              be set manually and will likely be overwritten by the rest of the
+              library.
+            </summary>
+            
+            <value>The index of the item, represented as a GUID value formatted as a HTML-friendly string.</value>
+            
+        </member>
+        <member name="T:DynamicVML.IDynamicListItem`1">
+            <summary>
+              Represents an item stored in a <see cref="T:DynamicVML.DynamicList`2"/> 
+              when the type of the view model needs to be known.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicListItem`1.ViewModel">
+            <summary>
+              Gets or sets the view model stored in this item.
+            </summary>
+            
+            <value>The view model.</value>
+            
+        </member>
+        <member name="T:DynamicVML.IDynamicViewModelCollection`1">
+            <summary>
+              Represents an entity that contains a list of view model objects.
+            </summary>
+            
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+            
+            <seealso cref="T:DynamicVML.DynamicList`1" />
+            <seealso cref="T:DynamicVML.DynamicList`2" />
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicViewModelCollection`1.ViewModels">
+            <summary>
+              Gets an enumerable that can be used to iterate through your ViewModel objects
+              that may be contained in this list.
+            </summary>
+            
+            <value>The view models, represented as an <see cref="T:System.Collections.Generic.IEnumerable`1"/>.</value>
+            
+        </member>
+        <member name="P:DynamicVML.IDynamicViewModelCollection`1.Count">
+            <summary>
+              Gets the number of elements contained in this list.
+            </summary>
+            
+            <value>The number of elements in this list.</value>
+            
+        </member>
+        <member name="M:DynamicVML.IDynamicViewModelCollection`1.Clear">
+            <summary>
+              Removes all items from this list.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.IDynamicViewModelCollection`1.ToModel``1(System.Func{`0,``0})">
+            <summary>
+              Converts all view models stored inside this instance to their database model 
+              counterparts using the specified <paramref name="func">lambda function</paramref>.
+            </summary>
+            
+            <typeparam name="TModel">The type for the models to convert to.</typeparam>
+            
+            <param name="func">
+                A function that takes a <see typeparamref="TViewModel"/> 
+                and converts it to a <see typeparamref="TModel"/>.
+            </param>
+            
+            <returns>
+                A <see cref="T:System.Collections.Generic.IEnumerable`1"/> that can be materialized to an actual 
+                list/collection or just iterated over (e.g. using <see cref="N:System.Linq"/>.
+            </returns>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.ItemParameters">
+            <summary>
+              Base class for <see cref="T:DynamicVML.Internals.ItemDisplayParameters"/> and <see cref="T:DynamicVML.Internals.ItemEditorParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ItemParameters.Index">
+            <summary>
+              Gets the HTML div ID associted with this list item.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ItemParameters.#ctor(System.String,System.String)">
+            <summary>
+              Creates a new instance of the <see cref="T:DynamicVML.Internals.Parameters"/> class.
+            </summary>
+            
+            <param name="containerId">The HTML div element ID for the current list.</param>
+            <param name="itemId">The HTML div element ID for the current list item.</param>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.Parameters">
+            <summary>
+              Base class for <see cref="T:DynamicVML.Internals.ListParameters"/> and <see cref="T:DynamicVML.Internals.ItemParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.Parameters.ContainerId">
+            <summary>
+              Gets the HTML div element ID for the current list.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.Parameters.#ctor(System.String)">
+            <summary>
+              Creates a new instance of the <see cref="T:DynamicVML.Internals.Parameters"/> class.
+            </summary>
+            
+            <param name="containerId">The HTML div element ID for the current list.</param>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.Constants">
+            <summary>
+              Constants that are used throughout the Dynamic View Model library. You can use the value of 
+              those constants to access internal objects created by the library which may be present in 
+              your view's <see cref="T:Microsoft.AspNetCore.Mvc.ViewFeatures.ViewDataDictionary">ViewData</see>.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.DefaultListContainerTemplate">
+            <summary>
+              Gets the default file name for list containers. The default is "DynamicListContainer".
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.DefaultListTemplate">
+            <summary>
+              Gets the default file name for lists. The default is "DynamicList".
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.DefaultItemContainerTemplate">
+            <summary>
+              Gets the default file name for list item containers. The default is "DynamicItemContainer".
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.AdditionalViewData">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing additional user data objects.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.CurrentIndex">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing the <see cref="P:DynamicVML.IDynamicListItem.Index"/>
+              for the current item.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.CurrentContainerId">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing the <see cref="P:DynamicVML.IDynamicList.ContainerId"/>
+              for the current list.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.EditorOptions">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="F:DynamicVML.Internals.Constants.EditorOptions"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.DisplayOptions">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="F:DynamicVML.Internals.Constants.DisplayOptions"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.ListDisplayParameters">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="F:DynamicVML.Internals.Constants.ListDisplayParameters"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.ListEditorParameters">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="F:DynamicVML.Internals.Constants.ListEditorParameters"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.ItemDisplayParameters">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="F:DynamicVML.Internals.Constants.ItemDisplayParameters"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.ItemEditorParameters">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="F:DynamicVML.Internals.Constants.ItemEditorParameters"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="F:DynamicVML.Internals.Constants.ItemCreateParameters">
+            <summary>
+              Gets the string value that is used as a key in ViewData 
+              dictionaries when storing <see cref="T:DynamicVML.AddNewDynamicItem"/>
+              objects for the current view.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.ItemDisplayParameters">
+            <summary>
+              Represents the actual parameters being used to render an item of the list for display. An instance of this class
+              will be stored in the ViewData object of your view under the key <see cref="F:DynamicVML.Internals.Constants.ItemDisplayParameters"/>.
+            </summary>
+            
+            <seealso cref="T:DynamicVML.Internals.ListDisplayParameters"/>
+            <seealso cref="T:DynamicVML.Internals.ItemEditorParameters"/>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ItemDisplayParameters.Display">
+            <summary>
+              Gets the parameters used to render this list for display.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ItemDisplayParameters.#ctor(System.String,System.String,DynamicVML.Internals.ListDisplayParameters)">
+            <summary>
+              Creates a new instance of <see cref="T:DynamicVML.Internals.ItemDisplayParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.ItemEditorParameters">
+            <summary>
+              Represents the actual parameters being used to render an item of the list for edit. An instance of this class
+              will be stored in the ViewData object of your view under the key <see cref="F:DynamicVML.Internals.Constants.ItemEditorParameters"/>.
+            </summary>
+            
+            <seealso cref="T:DynamicVML.Internals.ListEditorParameters"/>
+            <seealso cref="T:DynamicVML.Internals.ItemDisplayParameters"/>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ItemEditorParameters.Editor">
+            <summary>
+              Gets the parameters used to render this list for edit.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ItemEditorParameters.AddNewItem">
+            <summary>
+              Gets the parameters that should be sent to the server with instructions 
+              on how to create new items to be dynamically added to the list.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ItemEditorParameters.#ctor(System.String,System.String,DynamicVML.AddNewDynamicItem,DynamicVML.Internals.ListEditorParameters)">
+            <summary>
+              Creates a new instance of <see cref="T:DynamicVML.Internals.ItemEditorParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.ListDisplayParameters">
+            <summary>
+              Represents the actual parameters being used to render the list. An instance of this class
+              will be stored in the ViewData object of your view under the key <see cref="F:DynamicVML.Internals.Constants.ListDisplayParameters"/>.
+              You should never need to instantiate this class directly as it is part of the inner workings
+              of the library.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListDisplayParameters.List">
+            <summary>
+              Gets the parameters used to create this list.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListDisplayParameters.AdditionalViewData">
+            <summary>
+              Gets any additional view data which may have been passed by the user
+              when calling the <see cref="M:DynamicVML.Extensions.EditorExtensions.DisplayListFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode)">Html.DisplayListFor</see>
+              or <see cref="M:DynamicVML.Extensions.EditorExtensions.ListEditorFor``2(Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.String,System.String,System.String,System.String,System.String,System.String,System.Object,DynamicVML.ListRenderMode,DynamicVML.NewItemMethod)">ListEditorFor</see> extension methods.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ListDisplayParameters.#ctor(DynamicVML.Internals.ListParameters,System.Object)">
+            <summary>
+              Creates a new instance of <see cref="T:DynamicVML.Internals.ListEditorParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.ListEditorParameters">
+            <summary>
+              Represents the actual parameters being used to render an editor for the list. An instance of this class
+              will be stored in the ViewData object of your view under the key <see cref="F:DynamicVML.Internals.Constants.ListEditorParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListEditorParameters.ActionUrl">
+            <summary>
+              Gets the actual <see cref="P:DynamicVML.Options.DynamicListEditorOptions.ActionUrl"/> being used.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListEditorParameters.AddNewItemText">
+            <summary>
+              Gets the actual <see cref="P:DynamicVML.Options.DynamicListEditorOptions.AddNewItemText"/> being used.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListEditorParameters.Method">
+            <summary>
+              Gets the actual <see cref="P:DynamicVML.Options.DynamicListEditorOptions.Method"/> being used.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ListEditorParameters.GetItemCreateParameters">
+            <summary>
+              Creates a new <see cref="T:DynamicVML.AddNewDynamicItem"/> object 
+              based on the information stored in this instance.
+            </summary>
+            
+            <returns>A new <see cref="T:DynamicVML.AddNewDynamicItem"/> object.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ListEditorParameters.GetActionInfo">
+            <summary>
+              Gets a string containing information about the item to be rendered
+              and the controller action to be called, either as a query string
+              (for when using <see cref="F:DynamicVML.NewItemMethod.Get"/> or JSON 
+              (for when using <see cref="F:DynamicVML.NewItemMethod.Post"/>. Those
+              instructions will be passed to the JavaScript scripts in the
+              view to call the controller using Ajax.
+            </summary>
+            
+            <returns>A string containing instructions on how to call the controller using Ajax.</returns>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ListEditorParameters.#ctor(DynamicVML.Internals.ListParameters,System.Object,System.String,System.String,DynamicVML.NewItemMethod)">
+            <summary>
+              Creates a new instance of <see cref="T:DynamicVML.Internals.ListEditorParameters"/>.
+            </summary>
+            
+        </member>
+        <member name="T:DynamicVML.Internals.ListParameters">
+            <summary>
+              Represents a collection of read-only parameter values that are being used to
+              currently render the list. Those cannot be changed after rendering has started.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListParameters.ItemTemplate">
+            <summary>
+              Gets the actual <see cref="P:DynamicVML.Options.DynamicListOptions.ItemTemplate"/> being used.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListParameters.ItemContainerTemplate">
+            <summary>
+              Gets the actual <see cref="P:DynamicVML.Options.DynamicListOptions.ItemContainerTemplate"/> being used.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListParameters.ListTemplate">
+            <summary>
+              Gets the actual <see cref="P:DynamicVML.Options.DynamicListOptions.ListTemplate"/> being used.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListParameters.Prefix">
+            <summary>
+              Gets the actual HTML prefix being used for the forms.
+            </summary>
+            
+        </member>
+        <member name="P:DynamicVML.Internals.ListParameters.Mode">
+            <summary>
+              Gets the actual <see cref="T:DynamicVML.ListRenderMode"/> being used.
+            </summary>
+            
+        </member>
+        <member name="M:DynamicVML.Internals.ListParameters.#ctor(System.String,System.String,System.String,System.String,System.String,DynamicVML.ListRenderMode)">
+            <summary>
+              Creates a new instance of <see cref="T:DynamicVML.Internals.ListParameters"/>.
+            </summary>
+            
+        </member>
+    </members>
+</doc>

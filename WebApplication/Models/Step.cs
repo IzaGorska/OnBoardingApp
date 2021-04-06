@@ -12,11 +12,11 @@ namespace WebApplication.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StepID { get; set; }
-      
+
         //[ForeignKey("Project")]
         public int ProjectID { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
-        public virtual Project Project{ get; set; }
+        public virtual Project Project { get; set; }
     }
 }
