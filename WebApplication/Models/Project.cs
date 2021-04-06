@@ -25,6 +25,7 @@ namespace WebApplication.Models
         [DisplayName("Opis")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
+
         public virtual ICollection<Step> Steps { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
         public virtual ICollection<Assignment> Assignments { get; set; }

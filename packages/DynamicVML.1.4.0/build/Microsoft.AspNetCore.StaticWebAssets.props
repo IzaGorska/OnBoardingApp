@@ -1,0 +1,18 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\lib\dynamic-viewmodel-lists\dvml.js">
+      <SourceType>Package</SourceType>
+      <SourceId>DynamicVML</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>/</BasePath>
+      <RelativePath>lib\dynamic-viewmodel-lists\dvml.js</RelativePath>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$(MSBuildThisFileDirectory)..\staticwebassets\lib\dynamic-viewmodel-lists\dvml.min.js">
+      <SourceType>Package</SourceType>
+      <SourceId>DynamicVML</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>/</BasePath>
+      <RelativePath>lib\dynamic-viewmodel-lists\dvml.min.js</RelativePath>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

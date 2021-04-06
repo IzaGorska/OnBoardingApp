@@ -4,8 +4,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using WebApplication.DAL;
 using WebApplication.Models;
 
@@ -45,25 +47,27 @@ namespace WebApplication.Controllers
             return View(project);
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ProjectID,Name,Description")] Project project, string[] StepNames, string[] Infos)
         {
-  
-                project.Steps = new List<Step>(); 
-                for (int i = 0; i < StepNames.Length; i++)
+
+            project.Steps = new List<Step>();
+            for (int i = 0; i < StepNames.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(StepNames[i]))
                 {
-                    if (!string.IsNullOrEmpty(StepNames[i]))
+                    Step step = new Step()
                     {
-                        Step step = new Step()
-                        {
-                            Info = Infos[i],
-                            Name = StepNames[i],
-                        };
-                        project.Steps.Add(step);
-                    }
+                        Info = Infos[i],
+                        Name = StepNames[i],
+                    };
+                    project.Steps.Add(step);
                 }
+
+
+            }
             if (ModelState.IsValid)
             {
 
